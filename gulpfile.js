@@ -3,7 +3,6 @@
 *******************************************************************************/
  
 const gulp = require('gulp'),                           // gulp core
-    less = require('gulp-less'),                        // less compiler
     sass = require('gulp-sass'),                        // sass compiler
     uglify = require('gulp-uglify'),                    // uglifies the js
     rename = require("gulp-rename");                    // rename files
@@ -32,20 +31,11 @@ const gulp = require('gulp'),                           // gulp core
 let isProduction = (argv.production === undefined) ? false : true;
 
 var target = {
-    less_src : 'less/main.less',                        // all less files
     sass_src : [
         'sass/main.scss',
         'sass/bootstrap.scss'
     ],
     css_dest : 'css',                                   // where to put minified css
-    js_lint_src : [                                     // all js that should be linted
-        'js/build/app.js',
-        'js/build/custom/switch.js',
-        'js/build/custom/scheme-loader.js'
-    ],
-    js_uglify_src : [                                   // all js files that should not be concatinated
-        'js/vue.js'
-    ],
     js_concat_src : [                                   // all js files that should be concatinated
         'js/_functions.js',
         'js/main.js'
@@ -67,29 +57,12 @@ var other = {                                           // other js files to be 
 var currentSprite = 'payment';
  
 /*******************************************************************************
-3. LESS TASK
+3. SASS TASK
 *******************************************************************************/
 var beep = function() {
 var exec = require('child_process').exec;
 	exec('canberra-gtk-play --file=/usr/share/sounds/freedesktop/stereo/dialog-error.oga');
 }
-
-
-gulp.task('less', function() {
-    gulp.src(target.less_src)                           // get the files
-	.pipe(plumber({errorHandler: notify.onError({
-		title: 'test',
-		message: "<%= error.message %>"
-		})}))
-        .pipe(less())                                   // compile all less
-		.on('error', beep)
-        .pipe(autoprefixer({                             // complete css with correct vendor prefixes
-        	browsers: ['last 2 versions'],
-        }))
-        .pipe(minifycss({specialComments:0}))
-        .pipe(gulp.dest(target.css_dest))               // where to put the file
-        .pipe(browserSync.reload({stream:true, once: true}));
-});
 
 gulp.task('sass', function() {
     gulp.src(target.sass_src)                           // get the files
