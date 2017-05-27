@@ -12,6 +12,8 @@ const gulp = require('gulp'),                           // gulp core
     autoprefixer = require('gulp-autoprefixer'),        // sets missing browserprefixes
     imagemin = require('gulp-imagemin'),                // optimize images
     spritesmith = require('gulp.spritesmith'),          // generate sprites
+    // buffer = require('vinyl-buffer'),
+    merge = require('merge-stream'),
     stripDebug = require('gulp-strip-debug'),           // remove debug log
     cache = require('gulp-cache'),                      // cache gulp tasks
     newer = require('gulp-newer'),                      // check files for changes
@@ -29,6 +31,7 @@ const gulp = require('gulp'),                           // gulp core
 2. FILE DESTINATIONS (RELATIVE TO ASSSETS FOLDER)
 *******************************************************************************/
 let isProduction = (argv.production === undefined) ? false : true;
+let currentSprite = (argv.sprite === undefined || argv.sprite === true) ? 'sprite' : argv.sprite;
 
 var target = {
     sass_src : [
@@ -54,7 +57,6 @@ var other = {                                           // other js files to be 
     ]
 }
 
-var currentSprite = 'payment';
  
 /*******************************************************************************
 3. SASS TASK
@@ -181,19 +183,26 @@ gulp.task('image-min', function() {
 *******************************************************************************/
 
 gulp.task('sprite', function () {
-  var spriteData = gulp.src('img/sprites/'+currentSprite+'/*.png').pipe(spritesmith({
+  var spriteData = gulp.src('images/sprites/'+currentSprite+'/*.png').pipe(spritesmith({
     imgName: currentSprite+'.png',
-    cssName: currentSprite+'.sass',
-    engine: 'pngsmith',
-    algorithm: 'binary-tree',
-    cssTemplate: 'stylus.template.mustache',
+    cssName: currentSprite+'.scss',
+    // engine: 'pngsmith',
+    // algorithm: 'binary-tree',
+    // cssTemplate: 'stylus.template.mustache',
     // cssVarMap: function(sprite) {
     //     sprite.name = 's-' + sprite.name
     // }
-    padding: 1
+    // padding: 1
   }));
-  spriteData.img.pipe(gulp.dest('img/'));
-  spriteData.css.pipe(gulp.dest('less/sprites/'));
+
+   var imgStream = spriteData.img
+        .pipe(gulp.dest('images/'));
+    var cssStream = spriteData.css
+        .pipe(gulp.dest('sass/sprites/'));
+  // return spriteData.pipe(gulp.dest('images/'));
+  return merge(imgStream, cssStream);
+  // spriteData.img.pipe(gulp.dest('images/'));
+  // spriteData.css.pipe(gulp.dest('sass/sprites/'));
 });
 
 
@@ -202,7 +211,6 @@ gulp.task('sprite', function () {
 *******************************************************************************/
 
 gulp.task('watch', function () {
-    // gulp.watch('less/**/*.less',['less']);
     gulp.watch('sass/**/*.scss',['sass']);
     gulp.watch(target.js_concat_src, ['js-concat']);
     gulp.watch(["*.html",'*.php'], ['bs-reload']);
