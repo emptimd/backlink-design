@@ -121,15 +121,16 @@ body {
 .login-btn {
 	width: 165px;
 	height: 30px;
+	line-height: 28px;
+	text-align: center;
 	border: 1px solid #006d68;
-	outline: none;
-	cursor: pointer;
-	background: none;
 	margin-top: 27px;
 	position: relative;
+	text-decoration: none;
+	display: inline-block;
+	color: #000;
 	padding: 0;
 	font-size: 18px;
-	line-height: 18px;
 	&:hover {
 		background-color: rgba(222,222,222,.3);
 	}
@@ -156,45 +157,6 @@ body {
 	white-space: nowrap;
 }
 
-
-// .take-over {
-// 	position: relative;
-// 	height: 61px;
-// 	background-color: #000;
-// 	text-transform: uppercase;
-// 	text-align: center;
-// 	font-size: 30px;
-// 	line-height: 60px;
-// 	color: #fff;
-// 	// border-radius: 100%/0 0 30px 30px;
-// 	// box-shadow: 0px 6px 0px white;
-// 	// &:after {
-// 	// 	content: "";
-// 	// 	width: 70%;
-// 	// 	background-color: #000;
-// 	// 	height: 10px;
-// 	// 	border-radius: 100%/0 0 20px 20px;
-// 	// 	border-radius: 100%/0 0 25px 25px;
-// 	// 	border-radius: 100%/0 0 30px 30px;
-// 	// 	// box-shadow: 0px 6px 0px white;
-// 	// 	display: block;
-// 	// 	margin: 0 auto;
-// 	// }
-
-	
-// 	&:after {
-// 		content: "";
-// 		width: 65%;
-// 		background-color: #000;
-// 		height: 20px;
-// 		border-radius: 100%/0 0 40px 40px;
-// 		display: block;
-// 		margin-top: -5px;
-// 		margin-left: auto;
-// 		margin-right: auto;
-// 	}
-// }
-
 /*-------------------------------------------------*/
 /* =  Section About
 /*-------------------------------------------------*/
@@ -202,7 +164,7 @@ body {
 	height: 1000px;
 	background-image: url(/images/battern.jpg);
 	margin-top: -15px;
-	padding-top: 29px;
+	padding-top: 44px;
 }
 
 .tools {
@@ -210,22 +172,185 @@ body {
 	border-radius: 6px;
 	border: 1px solid #ffffff;
 	background-color: rgba(255, 255, 255, 0.53);
-	font-size: 16px;
+	font-size: 18px;
 	color: #fff;
 	text-align: center;
 	height: 44px;
 	line-height: 44px;
 	position: relative;
+	white-space: nowrap;
 	&.tools-ga {
 		// font-size: 18px;
 	}
 }
 
 .seo-majestic {
-	display: inline-block;
 	position: absolute;
-	left: 3px;
-	top: 5px;
-	@ipo
+	left: 12px;
+	top: 4px;
+	@include sprite($icon1);
 }
 
+.social-engine {
+	position: absolute;
+	left: 3px;
+	top: 7px;
+	@include sprite($icon2);
+}
+
+.google-api {
+	position: absolute;
+	left: 8px;
+	top: 12px;
+	@include sprite($icon3);
+}
+
+.ahrefs {
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	@include sprite($icon4);
+}
+
+.ga {
+	position: absolute;
+	left: 5px;
+	top: 8px;
+	@include sprite($icon5);
+}
+
+.seo-majestic--text {
+	margin-left: 30px;
+}
+
+.social-engine--text {
+	margin-left: 20px;
+}
+
+.google-api--text {
+	margin-left: 20px;
+}
+
+.ga--text {
+	font-size: 16px;
+	margin-left: 35px;
+}
+
+.back-main {
+	width: 516px;
+	height: 78px;
+	line-height: 78px;
+	border-radius: 31px;
+	border: 2px solid #006368;
+	background-color: #ffffff;
+	margin-top: 54px;
+	margin-bottom: 78px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 28px;
+	font-style: italic;
+
+	img {
+		// margin-right: 7px;
+		margin-bottom: 20px;
+	}
+}
+
+.s900 {
+	font-weight: 900;
+}
+
+.s600 {
+	font-weight: 600;
+}
+
+.info-block {
+	text-align: center;
+
+	.wrap-image {
+		width: 138px;
+		height: 119px;
+		// margin: 0 auto;
+		position: relative;
+		display: inline-block;
+
+		// &:before {    /* create a full-height inline block pseudo=element */
+		//     content: '';
+		//     display: inline-block;
+		//     vertical-align: middle;  /* vertical alignment of the inline element */
+		//     height: 100%;
+		// }
+	}
+
+	img {
+		position: absolute;
+		left: 0;
+		right: 0;	
+		margin: auto;
+		bottom: 0;
+	}
+
+	h3 {
+		margin-top: 12px;
+		margin-bottom: 11px;
+		text-transform: uppercase;
+		font-size: 36px;
+		color: #fff;
+		font-weight: 300;
+	}
+
+	.detail {
+		color: #43d9b4;
+		font-size: 18px;
+		// padding-bottom: 18px;
+		border-bottom: 1px solid #fff;
+		max-width: 250px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 0;
+		line-height: 1.3;
+		font-weight: 300;
+
+	}
+
+	ul {
+		color: #fff;
+		list-style-image: url(/images/slice-1.png);
+		display: inline-block;
+		text-align: left;
+		font-style: italic;
+		line-height: 23px;
+		margin-top: 20px;
+	}
+}
+
+.big1 {
+	img {
+		bottom: 11px;
+	}
+
+	.detail {
+		min-height: 96px;
+	}
+}
+
+.big2 {
+	.wrap-image {
+		margin-left: 60px;
+	}
+	.detail {
+		min-height: 96px;
+	}
+}
+
+.big3 {
+	img {
+		bottom: 2px;
+	}
+
+	.detail {
+		margin-top: -7px;
+		padding-bottom: 18px;
+	}
+}
